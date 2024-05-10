@@ -47,23 +47,33 @@ function HomeScreen() {
     <SafeAreaView className={backgroundStyle}>
       <StatusBar backgroundColor={'#f5f5f5'} barStyle={'light-content'} />
       {/* <ActivityIndicator /> */}
-      <View className='bg-white p-4' >
-        <View>
-          <Text>User details</Text>
+      <View className='bg-white p-4 rounded-2xl' >
+        <View className='flex flex-row'>
+          <View className='flex-1 border-r border-neutral-200' >
+            <Text>Image 2</Text>
+          </View>
+          <View className='flex-[3_0_0] ml-2' >
+            <Text className='text-black text-2xl font-extrabold' >John Wick</Text>
+            <Text className='text-neutral-500 font-medium' >Account Owner</Text>
+          </View>
         </View>
-        <View>
-          <Text>Available balance</Text>
+        <View className='border rounded-lg border-neutral-100 my-4 p-4' >
+          <Text className='text-lg text-neutral-500 font-medium mb-2' >Available balance</Text>
+          <Text className='text-2xl text-black font-bold' >$ 10,000.78</Text>
         </View>
 
-        <View>
-          <View>
-            <Text>Add Btn</Text>
+        <View className='flex flex-row justify-between items-center'>
+          <View className='p-2 flex-1 items-center mr-2 border border-neutral-100 rounded-xl' >
+            <Text>Add Image</Text>
+            <Text className='text-black font-medium' >Add</Text>
           </View>
-          <View>
-            <Text>Send Btn</Text>
+          <View className='p-2 flex-1 items-center mr-2 border border-neutral-100 rounded-xl' >
+            <Text>Send Image</Text>
+            <Text className='text-black font-medium' >Send</Text>
           </View>
-          <View>
-            <Text>Invest Btn 2</Text>
+          <View className='p-2 flex-1 items-center border border-neutral-100 rounded-xl' >
+            <Text>Invest Image</Text>
+            <Text className='text-black font-medium' >Invest</Text>
           </View>
         </View>
 

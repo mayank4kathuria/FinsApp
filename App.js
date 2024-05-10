@@ -38,7 +38,7 @@ function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: 'Landing' }}
+          options={{ title: '' }}
         />
 
         {/* Screen 2 */}
