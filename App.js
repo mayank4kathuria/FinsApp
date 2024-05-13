@@ -18,12 +18,14 @@ import {
 } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 import HomeScreen from './Screens/HomeScreen';
 
 
-const Stack = createNativeStackNavigator();
+const BottomStack = createBottomTabNavigator();
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -33,18 +35,33 @@ function App() {
   return (
     <NavigationContainer>
       {/* <HomeScreen /> */}
-      <Stack.Navigator initialRouteName="Home" >
+      <BottomStack.Navigator initialRouteName="Home" >
         {/* Screen 1 */}
-        <Stack.Screen
+        <BottomStack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: '' }}
+          options={{ tabBarShowLabel: false, tabBarIcon : () => <Text>Icon Home</Text> }}
+        />
+        <BottomStack.Screen
+          name="Card"
+          component={HomeScreen}
+          options={{ tabBarShowLabel: false, tabBarIcon : () => <Text>Icon Card</Text> }}
+        />
+        <BottomStack.Screen
+          name="Transactions"
+          component={HomeScreen}
+          options={{ tabBarShowLabel: false, tabBarIcon : () => <Text>Icon Tran</Text> }}
+        />
+        <BottomStack.Screen
+          name="Settings"
+          component={HomeScreen}
+          options={{ tabBarShowLabel: false, tabBarIcon : () => <Text>Icon Set</Text> }}
         />
 
         {/* Screen 2 */}
         {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
 
-      </Stack.Navigator>
+      </BottomStack.Navigator>
     </NavigationContainer>
   );
 }

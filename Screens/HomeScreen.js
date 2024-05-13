@@ -85,7 +85,7 @@ function HomeScreen() {
           <Text className='bg-white rounded px-2 text-indigo-400 font-bold' >View all</Text>
         </View>
         <ScrollView horizontal contentInsetAdjustmentBehavior="automatic">
-          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2' >
+          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
             <View className='flex-1 px-2 rounded-3xl mr-2'>
               <Text>Image</Text>
             </View>
@@ -94,7 +94,7 @@ function HomeScreen() {
               <Text className='text-neutral-500 font-medium' >$40</Text>
             </View>
           </View>
-          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2' >
+          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
             <View className='flex-1 px-2 rounded-3xl mr-2'>
               <Text>Image</Text>
             </View>
@@ -103,7 +103,7 @@ function HomeScreen() {
               <Text className='text-neutral-500 font-medium' >$25</Text>
             </View>
           </View>
-          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2' >
+          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
             <View className='flex-1 px-2 rounded-3xl mr-2'>
               <Text>Image</Text>
             </View>
@@ -112,7 +112,7 @@ function HomeScreen() {
               <Text className='text-neutral-500 font-medium' >$60</Text>
             </View>
           </View>
-          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2' >
+          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
             <View className='flex-1 px-2 rounded-3xl mr-2'>
               <Text>Image</Text>
             </View>
