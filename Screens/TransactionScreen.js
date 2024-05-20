@@ -42,7 +42,7 @@ import {
 
 // type PropTypeStruc = { navigation: { navigate: Function } };
 
-function HomeScreen() {
+function TransactionScreen() {
   const isDarkMode = useColorScheme() === 'dark';
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -50,8 +50,15 @@ function HomeScreen() {
 
   return (
     <SafeAreaView className={backgroundStyle}>
-      <StatusBar backgroundColor={'#f5f5f5'} barStyle={'light-content'} />
-      {/* <ActivityIndicator /> */}
+      <Text>TransactionScreen coming soon</Text>
+    </SafeAreaView>
+  );
+}
+
+export default TransactionScreen;
+/* 
+<StatusBar backgroundColor={'#f5f5f5'} barStyle={'light-content'} />
+       // <ActivityIndicator />
       <View className='bg-white p-4 rounded-2xl mb-8' >
         <View className='flex flex-row'>
           <View className='flex-1 border-r border-neutral-200' >
@@ -146,10 +153,10 @@ function HomeScreen() {
             </View>
           </View>
         </View>
-        {/* <Button
-          title='Open'
-          onPress={() => setIsModalOpen(true)} >
-        </Button> */}
+        // <Button
+        //  title='Open'
+        //  onPress={() => setIsModalOpen(true)} >
+       // </Button>
       </View>
 
 
@@ -169,8 +176,5 @@ function HomeScreen() {
           </View>
         </ScrollView>
       </Modal>
-    </SafeAreaView>
-  );
-}
 
-export default HomeScreen;
+*/

@@ -13,6 +13,7 @@ import {
   ScrollView,
   StatusBar,
   Text,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
@@ -44,12 +45,12 @@ function App() {
         <BottomStack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ tabBarShowLabel: false, tabBarIcon : () => <Text>Icon Home</Text> }}
+          options={{ tabBarShowLabel: false, tabBarIcon: () => <Text>Home</Text> }}
         />
         <BottomStack.Screen
           name="Card"
-          component={HomeScreen}
-          options={{ tabBarShowLabel: false, tabBarIcon : () => <Text>Icon Card</Text> }}
+          component={CardScreen}
+          options={{ tabBarShowLabel: false, tabBarActiveBackgroundColor: '#f00', tabBarItemStyle: { marginRight: '10px' }, tabBarIcon: () => <Text>Card</Text> }}
         />
         {/* <BottomStack.Screen
           name="Add a new"
@@ -58,20 +59,20 @@ function App() {
         /> */}
         <BottomStack.Screen
           name="Transactions"
-          component={HomeScreen}
-          options={{ tabBarShowLabel: false, tabBarIcon : () => <Text>Icon Tran</Text> }}
+          component={TransactionScreen}
+          options={{ tabBarShowLabel: false, tabBarActiveBackgroundColor: '#f00', tabBarItemStyle: { marginLeft: '10px' }, tabBarIcon: () => <Text>Tran</Text> }}
         />
         <BottomStack.Screen
           name="Settings"
-          component={HomeScreen}
-          options={{ tabBarShowLabel: false, tabBarIcon : () => <Text>Icon Set</Text> }}
+          component={SettingScreen}
+          options={{ tabBarShowLabel: false, tabBarIcon: () => <Text>Set</Text> }}
         />
 
         {/* Screen 2 */}
         {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
 
       </BottomStack.Navigator>
-    </NavigationContainer>
+    </NavigationContainer >
   );
 }
 
