@@ -23,6 +23,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import HomeScreen from './Screens/HomeScreen';
+import CardScreen from './Screens/CardScreen';
+import TransactionScreen from './Screens/TransactionScreen';
+import SettingScreen from './Screens/SettingScreen';
+import AddNewModalScreen from './Screens/AddNewModalScreen';
 
 
 const BottomStack = createBottomTabNavigator();
@@ -47,6 +51,11 @@ function App() {
           component={HomeScreen}
           options={{ tabBarShowLabel: false, tabBarIcon : () => <Text>Icon Card</Text> }}
         />
+        {/* <BottomStack.Screen
+          name="Add a new"
+          component={AddNewModalScreen}
+          options={{ tabBarShowLabel: false, unmountOnBlur: true, tabBarIcon: () => <Text className='text-4xl text-white px-4 py-1 rounded-3xl relative bottom-6 bg-indigo-400' >+</Text> }}
+        /> */}
         <BottomStack.Screen
           name="Transactions"
           component={HomeScreen}
