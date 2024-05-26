@@ -14,37 +14,17 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
-// import {
-//   DebugInstructions,
-//   Header,
-//   LearnMoreLinks,
-//   ReloadInstructions,
-// } from 'react-native/Libraries/NewAppScreen';
-
-// type SectionProps = PropsWithChildren<{
-//   title: string;
-// }>;
-
-// function Section({ children, title }: SectionProps): React.JSX.Element {
-//   return (
-//     <View className="mt-8 px-2" >
-//       <Text className="text-2xl text-black dark:text-white" >
-//         {title}
-//       </Text>
-//       <Text className="mt-2 text-lg text-black dark:text-white">
-//         {children}
-//       </Text>
-//     </View>
-//   );
-// }
-// : React.JSX.Element
-
-// type PropTypeStruc = { navigation: { navigate: Function } };
+import { useSelector, useDispatch } from 'react-redux';
+import { decrementMoney, incrementMoney } from '../FeatureSlice/accountSlice';
+import BottomModal from '../Component/BottomModal';
 
 function HomeScreen() {
   const isDarkMode = useColorScheme() === 'dark';
+  const availableBalance = useSelector((state) => state.account.availableBalance);
+  const currencySymbol = useSelector((state) => state.account.currencySymbol);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   const backgroundStyle = "bg-neutral-100 bg-blacky h-screen dark:bg-slate-900 p-4"
 
@@ -64,22 +44,25 @@ function HomeScreen() {
         </View>
         <View className='border rounded-lg border-neutral-100 my-4 p-4' >
           <Text className='text-lg text-neutral-500 font-medium mb-2' >Available balance</Text>
-          <Text className='text-2xl text-black font-bold' >₹ 10,000.78</Text>
+          <Text className='text-2xl text-black font-bold' >{`${currencySymbol} ${availableBalance}`}</Text>
         </View>
 
         <View className='flex flex-row justify-between items-center py-2'>
-          <View className='p-2 flex-1 items-center mr-2 border border-neutral-100 rounded-xl' >
+          <TouchableOpacity className='p-2 flex-1 items-center mr-2 border border-neutral-100 rounded-xl'
+            onPress={() => dispatch(incrementMoney(1))} >
             <Text>Add Image</Text>
             <Text className='text-black font-medium' >Add</Text>
-          </View>
-          <View className='p-2 flex-1 items-center mr-2 border border-neutral-100 rounded-xl' >
+          </TouchableOpacity>
+          <TouchableOpacity className='p-2 flex-1 items-center mr-2 border border-neutral-100 rounded-xl'
+            onPress={() => dispatch(decrementMoney(1))} >
             <Text>Send Image</Text>
             <Text className='text-black font-medium' >Send</Text>
-          </View>
-          <View className='p-2 flex-1 items-center border border-neutral-100 rounded-xl' >
+          </TouchableOpacity>
+          <TouchableOpacity className='p-2 flex-1 items-center border border-neutral-100 rounded-xl'
+            onPress={() => dispatch(decrementMoney(1))} >
             <Text>Invest Image</Text>
             <Text className='text-black font-medium' >Invest</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
       </View>
@@ -153,7 +136,7 @@ function HomeScreen() {
       </View>
 
 
-      <Modal
+      {/* <Modal
         animationType="slide"
         visible={isModalOpen}>
         <ScrollView className='p-4' >
@@ -163,12 +146,18 @@ function HomeScreen() {
               <Text className='text-2xl text-slate-800 px-2 rounded-2xl relative bg-neutral-300 rotate-45' >+</Text>
             </TouchableOpacity>
           </View>
-          
+
           <View>
             <Text>Here goes the modal text</Text>
           </View>
         </ScrollView>
-      </Modal>
+      </Modal> */}
+      <BottomModal
+        visible={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <Text>Hello World</Text>
+      </BottomModal>
     </SafeAreaView>
   );
 }
