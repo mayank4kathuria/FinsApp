@@ -16,17 +16,49 @@ import {
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementMoney, incrementMoney } from '../FeatureSlice/accountSlice';
-import BottomModal from '../Component/BottomModal';
+import BottomModal from '../Components/BottomModal';
+import AddMoneyModal from '../Components/Modals/AddModals';
+
+
+function showModalContent({ modalType = null, modalData = null }) {
+  return () => {
+    if (modalType === 'ADD_MONEY') return <AddMoneyModal modalData={modalData} />
+    else if (modalType === 'SEND_MONEY') return <SendMoneyModal modalData={modalData} />
+    else if (modalType === 'INVEST_MONEY') return <SendMoneyModal modalData={modalData} />
+    else if (modalType === 'VIEW_ALL_PAYMENTS') return <ViewAllPaymentsModal modalData={modalData} />
+    else if (modalType === 'VIEW_PRE_PAYMENT') return <ViewPrePaymentModal modalData={modalData} />
+    else if (modalType === 'ADD_NEW_CARD') return <AddNewCardModal modalData={modalData} />
+    // else if (modalType === 'VIEW_PRE_PAYMENT') return <ViewPrePayment modalData={modalData} />
+    else if (modalType === 'PAY_TO_USER') return <PayToUserModal modalData={modalData} />
+    else null;
+  }
+}
 
 function HomeScreen() {
   const isDarkMode = useColorScheme() === 'dark';
   const availableBalance = useSelector((state) => state.account.availableBalance);
   const currencySymbol = useSelector((state) => state.account.currencySymbol);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalObj, setModalObj] = useState({ modalType: null, modalData: null });
 
   const dispatch = useDispatch();
 
-  const backgroundStyle = "bg-neutral-100 bg-blacky h-screen dark:bg-slate-900 p-4"
+
+  function resetModalState() {
+    setModalObj({ modalType: null, modalData: null });
+  }
+
+
+  function handleAddMoneySubmit(incrementBy) {
+
+    dispatch(incrementMoney(incrementBy));
+    resetModalState();
+    setIsModalOpen(false);
+  }
+
+
+
+  const backgroundStyle = "bg-neutral-100 bg-blacky h-screen dark:bg-slate-900 p-4";
 
   return (
     <SafeAreaView className={backgroundStyle}>
@@ -49,7 +81,11 @@ function HomeScreen() {
 
         <View className='flex flex-row justify-between items-center py-2'>
           <TouchableOpacity className='p-2 flex-1 items-center mr-2 border border-neutral-100 rounded-xl'
-            onPress={() => dispatch(incrementMoney(1))} >
+            onPress={() => {
+              setModalObj({ modalType: 'ADD_MONEY', modalData: { handleSubmitFn: handleAddMoneySubmit } });
+              setIsModalOpen(true);
+              // dispatch(incrementMoney(1))
+            }} >
             <Text>Add Image</Text>
             <Text className='text-black font-medium' >Add</Text>
           </TouchableOpacity>
@@ -135,30 +171,14 @@ function HomeScreen() {
         </Button> */}
       </View>
 
-
-      {/* <Modal
-        animationType="slide"
-        visible={isModalOpen}>
-        <ScrollView className='p-4' >
-          <View className='flex flex-row justify-between items-center' >
-            <Text className='text-black font-bold text-xl ' >Modal</Text>
-            <TouchableOpacity onPress={() => setIsModalOpen(false)} >
-              <Text className='text-2xl text-slate-800 px-2 rounded-2xl relative bg-neutral-300 rotate-45' >+</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View>
-            <Text>Here goes the modal text</Text>
-          </View>
-        </ScrollView>
-      </Modal> */}
       <BottomModal
         visible={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => { setIsModalOpen(false) , resetModalState()}}
+        showBackBtn
       >
-        <Text>Hello World</Text>
+        {isModalOpen && showModalContent(modalObj)()}
       </BottomModal>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 
