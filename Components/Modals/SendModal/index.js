@@ -9,6 +9,26 @@ import {
 } from 'react-native';
 
 import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils /numericUtils';
+import DropDown from '../../DropDown';
+
+const SEND_TO_USERS_LIST = [
+    {
+        id: 1,
+        name: 'Mom',
+    },
+    {
+        id: 2,
+        name: 'Padosi',
+    },
+    {
+        id: 3,
+        name: 'Dost',
+    },
+    {
+        id: 4,
+        name: 'Amitabh Bachchan',
+    }
+]
 
 const AddModal = ({ modalData }) => {
 
@@ -17,12 +37,18 @@ const AddModal = ({ modalData }) => {
     const [amountHasError, setAmountHasError] = useState(false);
     const [amountErrorText, setAmountErrorText] = useState(null);
 
-    function setErrorStates(errorMsg = null) {
+    const [sendToObj, setSendToObj] = useState(null);
+    const [SendToHasError, setSendToHasError] = useState(false);
+    const [sendToErrorText, setSendToErrorText] = useState(null);
+
+
+
+    function setAmountErrorStates(errorMsg = null) {
         setAmountHasError(true);
         setAmountErrorText(errorMsg);
     }
 
-    function resetErrorStates() {
+    function resetAmountErrorStates() {
         setAmountHasError(false);
         setAmountErrorText(null);
     }
@@ -32,30 +58,34 @@ const AddModal = ({ modalData }) => {
 
         if (checkForNumberWithDecialAllowed(value)) {
             if (value < 0) {
-                setErrorStates('Invalid input, Please enter postive number only')
+                setAmountErrorStates('Invalid input, Please enter postive number only')
             } else {
                 const onlyPositiveDecimalNum = getNumberWithDecimal(value);
                 setAmount(onlyPositiveDecimalNum);
 
-                if (amountHasError) resetErrorStates();
+                if (amountHasError) resetAmountErrorStates();
             }
         } else if (value < 0) {
-            setErrorStates('Invalid input, Please enter postive number only')
+            setAmountErrorStates('Invalid input, Please enter postive number only')
         } else if ((value + '').length === 0) {
-            setErrorStates('Please enter an amount')
+            setAmountErrorStates('Please enter an amount')
         } else {
-            setErrorStates(`Invalid input entered`)
+            setAmountErrorStates(`Invalid input entered`)
         }
     }
 
+    function handleSendToClick(selectedOption){
+        setSendToObj(selectedOption);
+    }
+
     function onSubmitClick() {
-        handleSubmitFn(amount);
+        handleSubmitFn({ amount, sendToObj });
     }
 
 
     return (
         <KeyboardAvoidingView className='h-full relative'>
-            <View className=''>
+            <View className='mb-4'>
                 <Text className='font-bold mb-2' >Amount</Text>
                 <TextInput
                     onChangeText={handleNameField}
@@ -65,9 +95,19 @@ const AddModal = ({ modalData }) => {
                     inputMode='numeric'
                     maxLength={10}
                     defaultValue={''}
-                    className={`rounded-md border ${amountHasError && amountErrorText ? 'border-red-400' : 'border-neutral-300'}`}
+                    className={`rounded-md border ${amountHasError && amountErrorText ? 'border-red-500' : 'border-neutral-300'}`}
                 />
-                {amountHasError && <Text className='text-sm text-red-400' >{amountErrorText}</Text>}
+                {amountHasError && <Text className='text-sm text-red-500' >{amountErrorText}</Text>}
+            </View>
+            <View className='mb-4'>
+                <Text className='font-bold mb-2' >Send To</Text>
+                <DropDown
+                    options={SEND_TO_USERS_LIST}
+                    hasError={false}
+                    errorText={null}
+                    value={sendToObj}
+                    onSelectOption={handleSendToClick}
+                />
             </View>
             <View className='absolute bottom-0 flex flex items-center w-full'>
                 <View className='w-3/5 pb-4' >

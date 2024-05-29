@@ -18,6 +18,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { decrementMoney, incrementMoney } from '../FeatureSlice/accountSlice';
 import BottomModal from '../Components/BottomModal';
 import AddMoneyModal from '../Components/Modals/AddModals';
+import SendMoneyModal from '../Components/Modals/SendModal';
+import DropDown from '../Components/DropDown';
 
 
 function showModalContent({ modalType = null, modalData = null }) {
@@ -56,6 +58,21 @@ function HomeScreen() {
     setIsModalOpen(false);
   }
 
+  function handleSendMoneySubmit(data) {
+    const { amount, sendToObj } = data;
+
+    dispatch(decrementMoney(amount));
+    resetModalState();
+    setIsModalOpen(false);
+
+  }
+
+  function handleCloseClick() {
+    setIsModalOpen(false);
+    resetModalState();
+
+  }
+
 
 
   const backgroundStyle = "bg-neutral-100 bg-blacky h-screen dark:bg-slate-900 p-4";
@@ -90,12 +107,22 @@ function HomeScreen() {
             <Text className='text-black font-medium' >Add</Text>
           </TouchableOpacity>
           <TouchableOpacity className='p-2 flex-1 items-center mr-2 border border-neutral-100 rounded-xl'
-            onPress={() => dispatch(decrementMoney(1))} >
+            onPress={() => {
+              setModalObj({ modalType: 'SEND_MONEY', modalData: { handleSubmitFn: handleSendMoneySubmit } });
+              setIsModalOpen(true);
+              // dispatch(decrementMoney(1))
+            }}
+          >
             <Text>Send Image</Text>
             <Text className='text-black font-medium' >Send</Text>
           </TouchableOpacity>
           <TouchableOpacity className='p-2 flex-1 items-center border border-neutral-100 rounded-xl'
-            onPress={() => dispatch(decrementMoney(1))} >
+            onPress={() => {
+              setModalObj({ modalType: 'ADD_MONEY', modalData: { handleSubmitFn: handleAddMoneySubmit } });
+              setIsModalOpen(true);
+              // dispatch(decrementMoney(1))
+            }}
+          >
             <Text>Invest Image</Text>
             <Text className='text-black font-medium' >Invest</Text>
           </TouchableOpacity>
@@ -173,7 +200,7 @@ function HomeScreen() {
 
       <BottomModal
         visible={isModalOpen}
-        onClose={() => { setIsModalOpen(false) , resetModalState()}}
+        onClose={handleCloseClick}
         showBackBtn
       >
         {isModalOpen && showModalContent(modalObj)()}
