@@ -19,14 +19,14 @@ import { decrementMoney, incrementMoney } from '../FeatureSlice/accountSlice';
 import BottomModal from '../Components/BottomModal';
 import AddMoneyModal from '../Components/Modals/AddModals';
 import SendMoneyModal from '../Components/Modals/SendModal';
-import DropDown from '../Components/DropDown';
+import InvestMoneyModal from '../Components/Modals/InvestMoneyModal';
 
 
 function showModalContent({ modalType = null, modalData = null }) {
   return () => {
     if (modalType === 'ADD_MONEY') return <AddMoneyModal modalData={modalData} />
     else if (modalType === 'SEND_MONEY') return <SendMoneyModal modalData={modalData} />
-    else if (modalType === 'INVEST_MONEY') return <SendMoneyModal modalData={modalData} />
+    else if (modalType === 'INVEST_MONEY') return <InvestMoneyModal modalData={modalData} />
     else if (modalType === 'VIEW_ALL_PAYMENTS') return <ViewAllPaymentsModal modalData={modalData} />
     else if (modalType === 'VIEW_PRE_PAYMENT') return <ViewPrePaymentModal modalData={modalData} />
     else if (modalType === 'ADD_NEW_CARD') return <AddNewCardModal modalData={modalData} />
@@ -60,6 +60,15 @@ function HomeScreen() {
 
   function handleSendMoneySubmit(data) {
     const { amount, sendToObj } = data;
+
+    dispatch(decrementMoney(amount));
+    resetModalState();
+    setIsModalOpen(false);
+
+  }
+  
+  function handleInvestMoneySubmit(data) {
+    const { amount, investToObj } = data;
 
     dispatch(decrementMoney(amount));
     resetModalState();
@@ -118,7 +127,7 @@ function HomeScreen() {
           </TouchableOpacity>
           <TouchableOpacity className='p-2 flex-1 items-center border border-neutral-100 rounded-xl'
             onPress={() => {
-              setModalObj({ modalType: 'ADD_MONEY', modalData: { handleSubmitFn: handleAddMoneySubmit } });
+              setModalObj({ modalType: 'INVEST_MONEY', modalData: { handleSubmitFn: handleInvestMoneySubmit } });
               setIsModalOpen(true);
               // dispatch(decrementMoney(1))
             }}

@@ -14,36 +14,36 @@ import DropDown from '../../DropDown';
 const SEND_TO_USERS_LIST = [
     {
         id: 1,
-        label: 'Mom',
-        value: 'MOM',
+        label: 'Stocks',
+        value: 'STOCKS',
     },
     {
         id: 2,
-        label: 'Padosi',
-        value: 'PADOSI',
+        label: 'Crypto',
+        value: 'CRYPTO',
     },
     {
         id: 3,
-        label: 'Dost',
-        value: 'DOST',
+        label: 'Gold',
+        value: 'GOLD',
     },
     {
         id: 4,
-        label: 'Amitabh Bachchan',
-        value: 'AMITABH_BACHCHAN',
+        label: 'Real Estate',
+        value: 'REAL_ESTATE',
     }
 ]
 
-const SendMoneyModal = ({ modalData }) => {
+const InvestMoneyModal = ({ modalData }) => {
 
     const { handleSubmitFn = () => null } = modalData;
     const [amount, setAmount] = useState('');
     const [amountHasError, setAmountHasError] = useState(false);
     const [amountErrorText, setAmountErrorText] = useState(null);
 
-    const [sendToObj, setSendToObj] = useState(null);
-    const [SendToHasError, setSendToHasError] = useState(false);
-    const [sendToErrorText, setSendToErrorText] = useState(null);
+    const [investToObj, setInvestToObj] = useState(null);
+    const [investToHasError, setInvestToHasError] = useState(false);
+    const [investToErrorText, setInvestToErrorText] = useState(null);
 
 
 
@@ -78,15 +78,15 @@ const SendMoneyModal = ({ modalData }) => {
         }
     }
 
-    function resetSendToStates() {
-        setSendToHasError(false);
-        setSendToErrorText(null);
+    function resetInvestToStates() {
+        setInvestToHasError(false);
+        setInvestToErrorText(null);
     }
 
-    function handleSendToClick(selectedOption) {
-        setSendToObj(selectedOption);
+    function handleInvestToClick(selectedOption) {
+        setInvestToObj(selectedOption);
 
-        if (SendToHasError) resetSendToStates();
+        if (investToHasError) resetInvestToStates();
     }
 
     function onSubmitClick() {
@@ -96,13 +96,13 @@ const SendMoneyModal = ({ modalData }) => {
             hasAnyError = true;
             handleNameField('');
         }
-        if (sendToObj === null) {
+        if (investToObj === null) {
             hasAnyError = true;
-            setSendToHasError(true);
-            setSendToErrorText('This field is required.');
+            setInvestToHasError(true);
+            setInvestToErrorText('This field is required.');
         }
 
-        if (!hasAnyError) handleSubmitFn({ amount, sendToObj });
+        if (!hasAnyError) handleSubmitFn({ amount, investToObj });
     }
 
 
@@ -123,21 +123,21 @@ const SendMoneyModal = ({ modalData }) => {
                 {amountHasError && <Text className='text-sm text-red-500' >{amountErrorText}</Text>}
             </View>
             <View className='mb-4'>
-                <Text className='font-bold mb-2' >Send To</Text>
+                <Text className='font-bold mb-2' >Invest To</Text>
                 <DropDown
                     options={SEND_TO_USERS_LIST}
-                    hasError={SendToHasError}
-                    errorText={sendToErrorText}
-                    value={sendToObj}
-                    onSelectOption={handleSendToClick}
+                    hasError={investToHasError}
+                    errorText={investToErrorText}
+                    value={investToObj}
+                    onSelectOption={handleInvestToClick}
                 />
             </View>
             <View className='absolute bottom-0 flex flex items-center w-full'>
                 <View className='w-3/5 pb-4' >
                     <Button
                         onPress={onSubmitClick}
-                        title='Send Money'
-                        disabled={amountHasError || SendToHasError}
+                        title='Invest Money'
+                        disabled={amountHasError || investToHasError}
                     />
                 </View>
             </View>
@@ -145,4 +145,4 @@ const SendMoneyModal = ({ modalData }) => {
     );
 }
 
-export default SendMoneyModal;
+export default InvestMoneyModal;

@@ -10,10 +10,10 @@ import {
 
 import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils /numericUtils';
 
-const AddModal = ({ modalData }) => {
+const AddMoneyModal = ({ modalData }) => {
 
     const { handleSubmitFn = () => null } = modalData;
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState('');
     const [amountHasError, setAmountHasError] = useState(false);
     const [amountErrorText, setAmountErrorText] = useState(null);
 
@@ -49,7 +49,14 @@ const AddModal = ({ modalData }) => {
     }
 
     function onSubmitClick() {
-        handleSubmitFn(amount);
+        let hasAnyError = false;
+
+        if (amount === '' || amount === null) {
+            hasAnyError = true;
+            handleNameField('');
+        }
+
+        if (!hasAnyError) handleSubmitFn(amount);
     }
 
 
@@ -74,7 +81,7 @@ const AddModal = ({ modalData }) => {
                     <Button
                         onPress={onSubmitClick}
                         title='Add Money'
-                        disabled={amountHasError || !amount}
+                        disabled={amountHasError}
                     />
                 </View>
             </View>
@@ -82,4 +89,4 @@ const AddModal = ({ modalData }) => {
     );
 }
 
-export default AddModal;
+export default AddMoneyModal;
