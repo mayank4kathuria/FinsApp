@@ -11,7 +11,7 @@ import {
 import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils /numericUtils';
 import DropDown from '../../DropDown';
 
-const SEND_TO_USERS_LIST = [
+const INVEST_TO_USERS_LIST = [
     {
         id: 1,
         label: 'Stocks',
@@ -125,7 +125,7 @@ const InvestMoneyModal = ({ modalData }) => {
             <View className='mb-4'>
                 <Text className='font-bold mb-2' >Invest To</Text>
                 <DropDown
-                    options={SEND_TO_USERS_LIST}
+                    options={INVEST_TO_USERS_LIST}
                     hasError={investToHasError}
                     errorText={investToErrorText}
                     value={investToObj}

@@ -8,8 +8,7 @@ import {
   ScrollView,
   StatusBar,
   Text,
-  TouchableHighlight,
-  TouchableNativeFeedback,
+  Pressable,
   TouchableOpacity,
   useColorScheme,
   View,
@@ -20,15 +19,46 @@ import BottomModal from '../Components/BottomModal';
 import AddMoneyModal from '../Components/Modals/AddModals';
 import SendMoneyModal from '../Components/Modals/SendModal';
 import InvestMoneyModal from '../Components/Modals/InvestMoneyModal';
+import ViewPrePaymentModal from '../Components/Modals/PrePaymentModal';
 
+const PRE_PAYMENTS = [{
+  id: 1,
+  prePaymentNameValue: 'Internet',
+  prePaymentAmountValue: 40,
+  currencySymbol: '₹',
+  prePaymentCategoryObj: { label: 'Internet', value: 'INTERNET', id: 1 }
+},
+{
+  id: 2,
+  prePaymentNameValue: 'SIP',
+  prePaymentAmountValue: 2999,
+  currencySymbol: '₹',
+  prePaymentCategoryObj: { label: 'Investment', value: 'INVESTMENT', id: 3 }
+},
+{
+  id: 3,
+  prePaymentNameValue: 'Electricity',
+  prePaymentAmountValue: 999,
+  currencySymbol: '₹',
+  prePaymentCategoryObj: { label: 'Utilities', value: 'UTILITIES', id: 4 }
+},
+{
+  id: 4,
+  prePaymentNameValue: 'Clubs',
+  prePaymentAmountValue: 349,
+  currencySymbol: '₹',
+  prePaymentCategoryObj: { label: 'Entertainment', value: 'ENTERTAINMENT', id: 2 }
+}];
+
+const EXTRA_HEIGHT_MODALS = ['VIEW_PRE_PAYMENT'];
 
 function showModalContent({ modalType = null, modalData = null }) {
   return () => {
     if (modalType === 'ADD_MONEY') return <AddMoneyModal modalData={modalData} />
     else if (modalType === 'SEND_MONEY') return <SendMoneyModal modalData={modalData} />
     else if (modalType === 'INVEST_MONEY') return <InvestMoneyModal modalData={modalData} />
-    else if (modalType === 'VIEW_ALL_PAYMENTS') return <ViewAllPaymentsModal modalData={modalData} />
     else if (modalType === 'VIEW_PRE_PAYMENT') return <ViewPrePaymentModal modalData={modalData} />
+    else if (modalType === 'VIEW_ALL_PAYMENTS') return <ViewAllPaymentsModal modalData={modalData} />
     else if (modalType === 'ADD_NEW_CARD') return <AddNewCardModal modalData={modalData} />
     // else if (modalType === 'VIEW_PRE_PAYMENT') return <ViewPrePayment modalData={modalData} />
     else if (modalType === 'PAY_TO_USER') return <PayToUserModal modalData={modalData} />
@@ -66,7 +96,7 @@ function HomeScreen() {
     setIsModalOpen(false);
 
   }
-  
+
   function handleInvestMoneySubmit(data) {
     const { amount, investToObj } = data;
 
@@ -74,6 +104,12 @@ function HomeScreen() {
     resetModalState();
     setIsModalOpen(false);
 
+  }
+
+  function handleViewPrePaymentSubmit(data){
+    // redux pre payment update Fn here - TODO
+    resetModalState();
+    setIsModalOpen(false);
   }
 
   function handleCloseClick() {
@@ -119,7 +155,6 @@ function HomeScreen() {
             onPress={() => {
               setModalObj({ modalType: 'SEND_MONEY', modalData: { handleSubmitFn: handleSendMoneySubmit } });
               setIsModalOpen(true);
-              // dispatch(decrementMoney(1))
             }}
           >
             <Text>Send Image</Text>
@@ -129,7 +164,6 @@ function HomeScreen() {
             onPress={() => {
               setModalObj({ modalType: 'INVEST_MONEY', modalData: { handleSubmitFn: handleInvestMoneySubmit } });
               setIsModalOpen(true);
-              // dispatch(decrementMoney(1))
             }}
           >
             <Text>Invest Image</Text>
@@ -147,42 +181,27 @@ function HomeScreen() {
           </TouchableOpacity>
         </View>
         <ScrollView horizontal contentInsetAdjustmentBehavior="automatic">
-          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
-            <View className='flex-1 px-2 rounded-3xl mr-2'>
-              <Text>Image</Text>
-            </View>
-            <View className='flex-[2_0_0] px-2'>
-              <Text className='text-black font-bold' >Internet</Text>
-              <Text className='text-neutral-500 font-medium' >₹40</Text>
-            </View>
-          </View>
-          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
-            <View className='flex-1 px-2 rounded-3xl mr-2'>
-              <Text>Image</Text>
-            </View>
-            <View className='flex-[2_0_0] px-2'>
-              <Text className='text-black font-bold' >Tv Set</Text>
-              <Text className='text-neutral-500 font-medium' >₹25</Text>
-            </View>
-          </View>
-          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
-            <View className='flex-1 px-2 rounded-3xl mr-2'>
-              <Text>Image</Text>
-            </View>
-            <View className='flex-[2_0_0] px-2'>
-              <Text className='text-black font-bold' >XBox</Text>
-              <Text className='text-neutral-500 font-medium' >₹60</Text>
-            </View>
-          </View>
-          <View className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
-            <View className='flex-1 px-2 rounded-3xl mr-2'>
-              <Text>Image</Text>
-            </View>
-            <View className='flex-[2_0_0] px-2'>
-              <Text className='text-black font-bold' >Food</Text>
-              <Text className='text-neutral-500 font-medium' >₹80</Text>
-            </View>
-          </View>
+
+          {PRE_PAYMENTS.map(({ prePaymentNameValue, prePaymentAmountValue, prePaymentCategoryObj, currencySymbol, id }) =>
+            <Pressable
+              key={id + ''}
+              onPress={() => {
+                setModalObj({ modalType: 'VIEW_PRE_PAYMENT', modalData: { handleSubmitFn: handleViewPrePaymentSubmit, prePaymentNameValue, prePaymentAmountValue, prePaymentCategoryObj, currencySymbol } });
+                setIsModalOpen(true);
+              }}
+            >
+              <View
+                className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
+                <View className='flex-1 px-2 rounded-3xl mr-2'>
+                  <Text>Image</Text>
+                </View>
+                <View className='flex-[2_0_0] px-2'>
+                  <Text className='text-black font-bold' >{prePaymentNameValue}</Text>
+                  <Text className='text-neutral-500 font-medium' >{`${currencySymbol}${prePaymentAmountValue}`}</Text>
+                </View>
+              </View>
+            </Pressable>)}
+
         </ScrollView>
       </View>
 
@@ -211,6 +230,7 @@ function HomeScreen() {
         visible={isModalOpen}
         onClose={handleCloseClick}
         showBackBtn
+        containerStyle={EXTRA_HEIGHT_MODALS.indexOf(modalObj.modalType) > -1 ? 'h-2/3' : ''}
       >
         {isModalOpen && showModalContent(modalObj)()}
       </BottomModal>
