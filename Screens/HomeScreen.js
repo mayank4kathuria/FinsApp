@@ -20,37 +20,11 @@ import AddMoneyModal from '../Components/Modals/AddModals';
 import SendMoneyModal from '../Components/Modals/SendModal';
 import InvestMoneyModal from '../Components/Modals/InvestMoneyModal';
 import ViewPrePaymentModal from '../Components/Modals/PrePaymentModal';
+import ViewAllPaymentsModal from '../Components/Modals/ViewAllPaymentsModal';
+import { modifyPrePayment, addNewPrePayment, removePrePayment } from '../FeatureSlice/prePaymentSlice';
 
-const PRE_PAYMENTS = [{
-  id: 1,
-  prePaymentNameValue: 'Internet',
-  prePaymentAmountValue: 40,
-  currencySymbol: '₹',
-  prePaymentCategoryObj: { label: 'Internet', value: 'INTERNET', id: 1 }
-},
-{
-  id: 2,
-  prePaymentNameValue: 'SIP',
-  prePaymentAmountValue: 2999,
-  currencySymbol: '₹',
-  prePaymentCategoryObj: { label: 'Investment', value: 'INVESTMENT', id: 3 }
-},
-{
-  id: 3,
-  prePaymentNameValue: 'Electricity',
-  prePaymentAmountValue: 999,
-  currencySymbol: '₹',
-  prePaymentCategoryObj: { label: 'Utilities', value: 'UTILITIES', id: 4 }
-},
-{
-  id: 4,
-  prePaymentNameValue: 'Clubs',
-  prePaymentAmountValue: 349,
-  currencySymbol: '₹',
-  prePaymentCategoryObj: { label: 'Entertainment', value: 'ENTERTAINMENT', id: 2 }
-}];
 
-const EXTRA_HEIGHT_MODALS = ['VIEW_PRE_PAYMENT'];
+const EXTRA_HEIGHT_MODALS = ['VIEW_PRE_PAYMENT', 'VIEW_ALL_PAYMENTS'];
 
 function showModalContent({ modalType = null, modalData = null }) {
   return () => {
@@ -70,6 +44,8 @@ function HomeScreen() {
   const isDarkMode = useColorScheme() === 'dark';
   const availableBalance = useSelector((state) => state.account.availableBalance);
   const currencySymbol = useSelector((state) => state.account.currencySymbol);
+  const prePayments = useSelector(state => state.prePayment)
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalObj, setModalObj] = useState({ modalType: null, modalData: null });
 
@@ -106,16 +82,27 @@ function HomeScreen() {
 
   }
 
-  function handleViewPrePaymentSubmit(data){
-    // redux pre payment update Fn here - TODO
-    resetModalState();
-    setIsModalOpen(false);
+  function handleViewPrePaymentSubmit(data, redirectTo = '') {
+
+    dispatch(modifyPrePayment(data));
+
+    if (redirectTo) {
+      if (redirectTo === 'VIEW_ALL_PAYMENTS') setModalObj({ modalType: 'VIEW_ALL_PAYMENTS', modalData: { currencySymbol, handleSubmitFn: handleViewPrePaymentSubmit, handlePaymentClick } });
+    } else {
+      resetModalState();
+      setIsModalOpen(false);
+    }
   }
 
   function handleCloseClick() {
     setIsModalOpen(false);
     resetModalState();
 
+  }
+
+  function handlePaymentClick(prePaymentObj,) {
+    setModalObj({ modalType: 'VIEW_PRE_PAYMENT', modalData: { handleSubmitFn: (data) => handleViewPrePaymentSubmit(data, 'VIEW_ALL_PAYMENTS'), currencySymbol, data: prePaymentObj } });
+    setIsModalOpen(true);
   }
 
 
@@ -176,19 +163,20 @@ function HomeScreen() {
       <View className='bg-neutral-100 mb-8' >
         <View className='flex flex-row justify-between items-center mb-4' >
           <Text className='text-xl text-black font-bold' >Monthly Payments</Text>
-          <TouchableOpacity onPress={() => setIsModalOpen(true)}>
+          <TouchableOpacity onPress={() => {
+            setModalObj({ modalType: 'VIEW_ALL_PAYMENTS', modalData: { currencySymbol, data: prePayments, handleSubmitFn: handleViewPrePaymentSubmit, handlePaymentClick } });
+            setIsModalOpen(true);
+
+          }}>
             <Text className='rounded p-2 text-indigo-400 font-bold' >View all</Text>
           </TouchableOpacity>
         </View>
         <ScrollView horizontal contentInsetAdjustmentBehavior="automatic">
 
-          {PRE_PAYMENTS.map(({ prePaymentNameValue, prePaymentAmountValue, prePaymentCategoryObj, currencySymbol, id }) =>
+          {prePayments.slice(0, 4).map((prePaymentObj) =>
             <Pressable
-              key={id + ''}
-              onPress={() => {
-                setModalObj({ modalType: 'VIEW_PRE_PAYMENT', modalData: { handleSubmitFn: handleViewPrePaymentSubmit, prePaymentNameValue, prePaymentAmountValue, prePaymentCategoryObj, currencySymbol } });
-                setIsModalOpen(true);
-              }}
+              key={prePaymentObj.paymentId + ''}
+              onPress={() => handlePaymentClick(prePaymentObj)}
             >
               <View
                 className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
@@ -196,8 +184,8 @@ function HomeScreen() {
                   <Text>Image</Text>
                 </View>
                 <View className='flex-[2_0_0] px-2'>
-                  <Text className='text-black font-bold' >{prePaymentNameValue}</Text>
-                  <Text className='text-neutral-500 font-medium' >{`${currencySymbol}${prePaymentAmountValue}`}</Text>
+                  <Text className='text-black font-bold' >{prePaymentObj.name}</Text>
+                  <Text className='text-neutral-500 font-medium' >{`${currencySymbol}${prePaymentObj.amount}`}</Text>
                 </View>
               </View>
             </Pressable>)}
@@ -220,10 +208,7 @@ function HomeScreen() {
             </View>
           </View>
         </View>
-        {/* <Button
-          title='Open'
-          onPress={() => setIsModalOpen(true)} >
-        </Button> */}
+
       </View>
 
       <BottomModal

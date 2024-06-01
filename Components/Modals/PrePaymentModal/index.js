@@ -37,57 +37,58 @@ const PRE_PAYMENT_CSTEGORY_LIST = [
 
 const PrePaymentModal = ({ modalData }) => {
 
-    const { handleSubmitFn = () => null, allowToModify = true, prePaymentNameValue = '', prePaymentAmountValue = '', prePaymentCategoryObj = null } = modalData;
+    const { handleSubmitFn = () => null, allowToModify = true, data = {} } = modalData;
+    const { name = '', amount = '', categoryObj = null } = data;
 
     const [isEditable, setIsEditable] = useState(true);
 
-    const [prePaymentName, setPrePaymentName] = useState('');
-    const [prePaymentHasError, setPrePaymentHasError] = useState(false);
-    const [prePaymentErrorText, setPrePaymentErrorText] = useState(null);
+    const [nameField, setNameField] = useState('');
+    const [nameFieldHasError, setNameFieldHasError] = useState(false);
+    const [nameFieldErrorText, setNameFieldErrorText] = useState(null);
  
-    const [categoryObj, setCategoryObj] = useState(null);
-    const [categoryHasError, setCategoryHasError] = useState(false);
-    const [categoryErrorText, setCategoryErrorText] = useState(null);
+    const [categoryField, setCategoryField] = useState(null);
+    const [categoryFieldHasError, setCategoryFieldHasError] = useState(false);
+    const [categoryFieldErrorText, setCategoryFieldErrorText] = useState(null);
     
-    const [amount, setAmount] = useState('');
-    const [amountHasError, setAmountHasError] = useState(false);
-    const [amountErrorText, setAmountErrorText] = useState(null);
+    const [amountField, setAmountField] = useState('');
+    const [amountFieldHasError, setAmountFieldHasError] = useState(false);
+    const [amountFieldErrorText, setAmountFieldErrorText] = useState(null);
 
     useEffect(() => {
         // Set Defaults state from props
 
-        if (!!prePaymentNameValue && (!!prePaymentAmountValue || prePaymentAmountValue === 0) && !!prePaymentCategoryObj?.value) setIsEditable(false);
+        if (!!name && (!!amount || amount === 0) && !!categoryObj?.value) setIsEditable(false);
         else setIsEditable(allowToModify);
 
-        if (!!prePaymentNameValue) setPrePaymentName(prePaymentNameValue);
-        if (!!prePaymentAmountValue || prePaymentAmountValue === 0) setAmount(prePaymentAmountValue);
-        if (!!prePaymentCategoryObj?.value) setCategoryObj(prePaymentCategoryObj);
+        if (!!name) setNameField(name);
+        if (!!amount || amount === 0) setAmountField(amount);
+        if (!!categoryObj?.value) setCategoryField(categoryObj);
 
 
     }, []);
 
 
     function setAmountErrorStates(errorMsg = null) {
-        setAmountHasError(true);
-        setAmountErrorText(errorMsg);
+        setAmountFieldHasError(true);
+        setAmountFieldErrorText(errorMsg);
     }
 
     function resetAmountErrorStates() {
-        setAmountHasError(false);
-        setAmountErrorText(null);
+        setAmountFieldHasError(false);
+        setAmountFieldErrorText(null);
     }
 
-    function handleNameField(value) {
-        setAmount(value);
+    function handleAmountField(value) {
+        setAmountField(value);
 
         if (checkForNumberWithDecialAllowed(value)) {
             if (value < 0) {
                 setAmountErrorStates('Invalid input, Please enter postive number only')
             } else {
                 const onlyPositiveDecimalNum = getNumberWithDecimal(value);
-                setAmount(onlyPositiveDecimalNum);
+                setAmountField(onlyPositiveDecimalNum);
 
-                if (amountHasError) resetAmountErrorStates();
+                if (amountFieldHasError) resetAmountErrorStates();
             }
         } else if (value < 0) {
             setAmountErrorStates('Invalid input, Please enter postive number only')
@@ -99,46 +100,46 @@ const PrePaymentModal = ({ modalData }) => {
     }
 
     function resetCategoryStates() {
-        setCategoryHasError(false);
-        setCategoryErrorText(null);
+        setCategoryFieldHasError(false);
+        setCategoryFieldErrorText(null);
     }
 
     function handleCategoryClick(selectedOption) {
-        setCategoryObj(selectedOption);
+        setCategoryField(selectedOption);
 
-        if (categoryHasError) resetCategoryStates();
+        if (categoryFieldHasError) resetCategoryStates();
     }
 
-    function resetPrePaymentStates() {
-        setPrePaymentHasError(false);
-        setPrePaymentErrorText(null);
+    function resetNameErrorStates() {
+        setNameFieldHasError(false);
+        setNameFieldErrorText(null);
     }
 
     function handlePrePaymentName(value) {
-        setPrePaymentName(value);
+        setNameField(value);
 
-        if (prePaymentHasError) resetPrePaymentStates();
+        if (nameFieldHasError) resetNameErrorStates();
     }
 
     function onSubmitClick() {
         let hasAnyError = false;
 
-        if (prePaymentName === '' || prePaymentName === null) {
+        if (nameField === '' || nameField === null) {
             hasAnyError = true;
-            setPrePaymentHasError(true);
-            setPrePaymentErrorText('This field is required.');
+            setNameFieldHasError(true);
+            setNameFieldErrorText('This field is required.');
         }
-        if (categoryObj === null) {
+        if (categoryField === null) {
             hasAnyError = true;
-            setCategoryHasError(true);
-            setCategoryErrorText('This field is required.');
+            setCategoryFieldHasError(true);
+            setCategoryFieldErrorText('This field is required.');
         }
         if (amount === '' || amount === null) {
             hasAnyError = true;
-            handleNameField('');
+            handleAmountField('');
         }
-
-        if (!hasAnyError) handleSubmitFn({ amount, categoryObj, prePaymentName });
+        // name = '', amount = '', categoryObj
+        if (!hasAnyError) handleSubmitFn({ ...data, amount: amountField, categoryObj: categoryField, name: nameField });
     }
 
     function toggleIsEditable() {
@@ -149,27 +150,27 @@ const PrePaymentModal = ({ modalData }) => {
     return (
         <KeyboardAvoidingView className='h-full relative'>
             <View className='mb-4'>
-                <Text className='font-bold mb-2' >Pre Payment Name</Text>
+                <Text className='font-bold mb-2' >Name</Text>
                 <TextInput
                     onChangeText={handlePrePaymentName}
-                    value={prePaymentName}
+                    value={nameField}
                     placeholder='Enter pre payment name'
                     // keyboardType='numeric'
                     // inputMode='numeric'
                     disabled={!isEditable}
                     maxLength={20}
                     defaultValue={''}
-                    className={`rounded-md border ${prePaymentHasError && prePaymentErrorText ? 'border-red-500' : 'border-neutral-300'}`}
+                    className={`rounded-md border ${nameFieldHasError && nameFieldErrorText ? 'border-red-500' : 'border-neutral-300'}`}
                 />
-                {prePaymentHasError && <Text className='text-sm text-red-500' >{prePaymentHasError}</Text>}
+                {nameFieldHasError && <Text className='text-sm text-red-500' >{nameFieldHasError}</Text>}
             </View>
             <View className='mb-4'>
-                <Text className='font-bold mb-2' >Pre Payment Category</Text>
+                <Text className='font-bold mb-2' >Category</Text>
                 <DropDown
                     options={PRE_PAYMENT_CSTEGORY_LIST}
-                    hasError={categoryHasError}
-                    errorText={categoryErrorText}
-                    value={categoryObj}
+                    hasError={categoryFieldHasError}
+                    errorText={categoryFieldErrorText}
+                    value={categoryField}
                     disabled={!isEditable}
                     onSelectOption={handleCategoryClick}
                 />
@@ -177,24 +178,24 @@ const PrePaymentModal = ({ modalData }) => {
             <View className='mb-4'>
                 <Text className='font-bold mb-2' >Amount</Text>
                 <TextInput
-                    onChangeText={handleNameField}
-                    value={amount}
+                    onChangeText={handleAmountField}
+                    value={amountField}
                     placeholder='Enter Amount'
                     keyboardType='numeric'
                     inputMode='numeric'
                     maxLength={10}
                     // defaultValue={''}
                     disabled={!isEditable}
-                    className={`rounded-md border ${amountHasError && amountErrorText ? 'border-red-500' : 'border-neutral-300'}`}
+                    className={`rounded-md border ${amountFieldHasError && amountFieldErrorText ? 'border-red-500' : 'border-neutral-300'}`}
                 />
-                {amountHasError && <Text className='text-sm text-red-500' >{amountErrorText}</Text>}
+                {amountFieldHasError && <Text className='text-sm text-red-500' >{amountFieldErrorText}</Text>}
             </View>
-            <View className='absolute bottom-0 flex items-center w-full'>
+            <View className='absolute bottom-0 flex flex-row items-center w-full'>
                 <View className='w-3/5 pb-4' >
                     <Button
                         onPress={onSubmitClick}
                         title='Modify / Save Pre Payment'
-                        disabled={amountHasError || categoryHasError || prePaymentHasError || !isEditable}
+                        disabled={amountFieldHasError || categoryFieldHasError || nameFieldHasError || !isEditable}
                     />
                 </View>
                 {allowToModify && !isEditable && <View className='ml-4 pb-4' >
