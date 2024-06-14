@@ -16,22 +16,11 @@ import {
     Animated,
     PanResponder
 } from 'react-native';
-import { transform } from 'typescript';
+
+import ArrowIcon from '../../Assets/svgs/BackArrow.svg';
 
 function BottomModal({ visible = true, onClose = () => null, children = null, headingLabelText = null, showBackBtn = false,
     handleBackBtn = () => null, containerStyle = null }) {
-
-    /* const pan = useRef(new Animated.ValueXY()).current;
-
-    const panResponder = useRef(
-        PanResponder.create({
-            // onMoveShouldSetPanResponder: () => true, TODO: implement pan responder
-            onPanResponderMove: Animated.event([null, { dy: pan.y }], { useNativeDriver : true }),
-            onPanResponderRelease: () => {
-                pan.extractOffset();
-            }
-        })
-    ).current; */
 
     return (
         <Modal
@@ -40,14 +29,11 @@ function BottomModal({ visible = true, onClose = () => null, children = null, he
             transparent={true}
         >
             <View className='h-full bg-neutral-300/70 flex relative' >
-                <Animated.View className={`absolute bottom-0 bg-white w-full rounded-t-2xl p-4 h-1/2 ${containerStyle}`}
-                // style={{ transform: { translateY: pan.y } }} TODO: implement pan responder
-                // {...panResponder.panHandlers}
-                >
+                <Animated.View className={`absolute bottom-0 bg-white w-full rounded-t-2xl p-4 h-1/2 ${containerStyle}`} >
                     <View className='flex flex-row justify-between items-center' >
                         {!!headingLabelText && (<Text className='text-black font-bold text-xl ' >{headingLabelText}</Text>)}
                         {showBackBtn && (<TouchableOpacity onPress={handleBackBtn} >
-                            <Text className='text-black font-bold text-xl pl-2 pb-2' >{"<--"}</Text>
+                            <ArrowIcon height={25} width={25} />
                         </TouchableOpacity>)}
                         {!headingLabelText && !showBackBtn && <View></View>}
 

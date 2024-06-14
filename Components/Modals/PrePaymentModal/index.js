@@ -9,10 +9,12 @@ import {
     View,
 } from 'react-native';
 
-import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils /numericUtils';
+import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils/numericUtils';
 import DropDown from '../../DropDown';
 
-const PRE_PAYMENT_CSTEGORY_LIST = [
+import EditIcon from '../../../Assets/svgs/EditIcon.svg';
+
+const PRE_PAYMENT_CATEGORY_LIST = [
     {
         id: 1,
         label: 'Internet',
@@ -45,11 +47,11 @@ const PrePaymentModal = ({ modalData }) => {
     const [nameField, setNameField] = useState('');
     const [nameFieldHasError, setNameFieldHasError] = useState(false);
     const [nameFieldErrorText, setNameFieldErrorText] = useState(null);
- 
+
     const [categoryField, setCategoryField] = useState(null);
     const [categoryFieldHasError, setCategoryFieldHasError] = useState(false);
     const [categoryFieldErrorText, setCategoryFieldErrorText] = useState(null);
-    
+
     const [amountField, setAmountField] = useState('');
     const [amountFieldHasError, setAmountFieldHasError] = useState(false);
     const [amountFieldErrorText, setAmountFieldErrorText] = useState(null);
@@ -167,7 +169,7 @@ const PrePaymentModal = ({ modalData }) => {
             <View className='mb-4'>
                 <Text className='font-bold mb-2' >Category</Text>
                 <DropDown
-                    options={PRE_PAYMENT_CSTEGORY_LIST}
+                    options={PRE_PAYMENT_CATEGORY_LIST}
                     hasError={categoryFieldHasError}
                     errorText={categoryFieldErrorText}
                     value={categoryField}
@@ -190,19 +192,22 @@ const PrePaymentModal = ({ modalData }) => {
                 />
                 {amountFieldHasError && <Text className='text-sm text-red-500' >{amountFieldErrorText}</Text>}
             </View>
-            <View className='absolute bottom-0 flex flex-row items-center w-full'>
-                <View className='w-3/5 pb-4' >
+            <View className='w-full absolute right-0 bottom-0 flex flex-row items-center justify-between'>
+                <View></View>
+                <View className='pb-4' >
                     <Button
                         onPress={onSubmitClick}
                         title='Modify / Save Pre Payment'
                         disabled={amountFieldHasError || categoryFieldHasError || nameFieldHasError || !isEditable}
                     />
                 </View>
-                {allowToModify && !isEditable && <View className='ml-4 pb-4' >
-                    <TouchableHighlight onPress={toggleIsEditable} >
-                        <Text>Edit ICON</Text>
-                    </TouchableHighlight>
-                </View>}
+                {allowToModify && !isEditable ?
+                    <View className='pb-4' >
+                        <TouchableHighlight onPress={toggleIsEditable} >
+                            <EditIcon height={30} width={30} />
+                        </TouchableHighlight>
+                    </View>
+                    : <View></View>}
             </View>
         </KeyboardAvoidingView>
     );

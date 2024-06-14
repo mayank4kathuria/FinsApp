@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-// import type { PropsWithChildren } from 'react';
 import {
-  ActivityIndicator,
-  Button,
-  Modal,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -12,8 +8,10 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
+  Image
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { decrementMoney, incrementMoney } from '../FeatureSlice/accountSlice';
 import BottomModal from '../Components/BottomModal';
 import AddMoneyModal from '../Components/Modals/AddModals';
@@ -22,7 +20,14 @@ import InvestMoneyModal from '../Components/Modals/InvestMoneyModal';
 import ViewPrePaymentModal from '../Components/Modals/PrePaymentModal';
 import ViewAllPaymentsModal from '../Components/Modals/ViewAllPaymentsModal';
 import { modifyPrePayment, addNewPrePayment, removePrePayment } from '../FeatureSlice/prePaymentSlice';
+import { ICONS_ENUM } from '../Utils/ImageUtils';
 
+import InvestMoney from "../Assets/svgs/InvestMoney.svg";
+import AddMoney from "../Assets/svgs/AddMoney.svg";
+import SendMoney from "../Assets/svgs/SendMoney.svg";
+import MoneyStackIcon from "../Assets/svgs/MoneyStackIcon.svg";
+
+const Profile_Image = require('../Assets/jpeg/john-wick-2.jpeg');
 
 const EXTRA_HEIGHT_MODALS = ['VIEW_PRE_PAYMENT', 'VIEW_ALL_PAYMENTS'];
 
@@ -112,11 +117,10 @@ function HomeScreen() {
   return (
     <SafeAreaView className={backgroundStyle}>
       <StatusBar backgroundColor={'#f5f5f5'} barStyle={'light-content'} />
-      {/* <ActivityIndicator /> */}
       <View className='bg-white p-4 rounded-2xl mb-8' >
         <View className='flex flex-row'>
           <View className='flex-1 border-r border-neutral-200' >
-            <Text>Image 2</Text>
+            <Image source={Profile_Image} style={{ height: 54, width: 54, borderRadius: 50 }} />
           </View>
           <View className='flex-[3_0_0] ml-2' >
             <Text className='text-black text-2xl font-extrabold' >John Wick</Text>
@@ -125,36 +129,36 @@ function HomeScreen() {
         </View>
         <View className='border rounded-lg border-neutral-100 my-4 p-4' >
           <Text className='text-lg text-neutral-500 font-medium mb-2' >Available balance</Text>
-          <Text className='text-2xl text-black font-bold' >{`${currencySymbol} ${availableBalance}`}</Text>
+          <Text className='text-2xl text-black font-bold' >{`${currencySymbol} ${availableBalance}`}</ Text>
         </View>
 
         <View className='flex flex-row justify-between items-center py-2'>
-          <TouchableOpacity className='p-2 flex-1 items-center mr-2 border border-neutral-100 rounded-xl'
+          <TouchableOpacity className='p-2 flex-1 items-center mr-2 border border-neutral-200 rounded-xl'
             onPress={() => {
               setModalObj({ modalType: 'ADD_MONEY', modalData: { handleSubmitFn: handleAddMoneySubmit } });
               setIsModalOpen(true);
               // dispatch(incrementMoney(1))
             }} >
-            <Text>Add Image</Text>
-            <Text className='text-black font-medium' >Add</Text>
+            <AddMoney height={30} width={30} />
+            <Text className='mt-2 font-medium' >Add</Text>
           </TouchableOpacity>
-          <TouchableOpacity className='p-2 flex-1 items-center mr-2 border border-neutral-100 rounded-xl'
+          <TouchableOpacity className='p-2 flex-1 items-center mr-2 border border-neutral-200 rounded-xl'
             onPress={() => {
               setModalObj({ modalType: 'SEND_MONEY', modalData: { handleSubmitFn: handleSendMoneySubmit } });
               setIsModalOpen(true);
             }}
           >
-            <Text>Send Image</Text>
-            <Text className='text-black font-medium' >Send</Text>
+            <SendMoney height={30} width={30} />
+            <Text className='mt-2 font-medium' >Send</Text>
           </TouchableOpacity>
-          <TouchableOpacity className='p-2 flex-1 items-center border border-neutral-100 rounded-xl'
+          <TouchableOpacity className='p-2 flex-1 items-center border border-neutral-200 rounded-xl'
             onPress={() => {
               setModalObj({ modalType: 'INVEST_MONEY', modalData: { handleSubmitFn: handleInvestMoneySubmit } });
               setIsModalOpen(true);
             }}
           >
-            <Text>Invest Image</Text>
-            <Text className='text-black font-medium' >Invest</Text>
+            <InvestMoney height={30} width={30} />
+            <Text className='mt-2 font-medium' >Invest</Text>
           </TouchableOpacity>
         </View>
 
@@ -164,7 +168,7 @@ function HomeScreen() {
         <View className='flex flex-row justify-between items-center mb-4' >
           <Text className='text-xl text-black font-bold' >Monthly Payments</Text>
           <TouchableOpacity onPress={() => {
-            setModalObj({ modalType: 'VIEW_ALL_PAYMENTS', modalData: { currencySymbol, data: prePayments, handleSubmitFn: handleViewPrePaymentSubmit, handlePaymentClick } });
+            setModalObj({ modalType: 'VIEW_ALL_PAYMENTS', modalData: { currencySymbol, handleSubmitFn: handleViewPrePaymentSubmit, handlePaymentClick } });
             setIsModalOpen(true);
 
           }}>
@@ -173,22 +177,23 @@ function HomeScreen() {
         </View>
         <ScrollView horizontal contentInsetAdjustmentBehavior="automatic">
 
-          {prePayments.slice(0, 4).map((prePaymentObj) =>
-            <Pressable
+          {prePayments.slice(0, 4).map((prePaymentObj) => {
+            const CategoryIcon = ICONS_ENUM[prePaymentObj?.categoryObj?.value] || <></>
+            return (<Pressable
               key={prePaymentObj.paymentId + ''}
               onPress={() => handlePaymentClick(prePaymentObj)}
             >
-              <View
-                className='w-36 flex flex-row bg-white items-center p-1 border border-neutral-100 rounded-3xl mr-2 my-2' >
+              <View className='flex flex-row bg-white items-center p-2 border border-neutral-50 rounded-2xl mr-2 my-2' >
                 <View className='flex-1 px-2 rounded-3xl mr-2'>
-                  <Text>Image</Text>
+                  <CategoryIcon height={30} width={30} />
                 </View>
-                <View className='flex-[2_0_0] px-2'>
+                <View className='flex-[2_2_0%] px-2'>
                   <Text className='text-black font-bold' >{prePaymentObj.name}</Text>
                   <Text className='text-neutral-500 font-medium' >{`${currencySymbol}${prePaymentObj.amount}`}</Text>
                 </View>
               </View>
-            </Pressable>)}
+            </Pressable>)
+          })}
 
         </ScrollView>
       </View>
@@ -198,9 +203,9 @@ function HomeScreen() {
           <Text className='text-xl text-black font-bold' >Advices</Text>
         </View>
         <View className='' >
-          <View className='flex flex-row bg-white items-center p-4 border border-neutral-100 rounded-3xl mr-4' >
+          <View className='flex flex-row bg-white items-center p-4 border border-neutral-100 rounded-xl' >
             <View className='px-2 rounded-3xl mr-4'>
-              <Text>Image 2</Text>
+              <MoneyStackIcon height={30} width={30} />
             </View>
             <View className='px-2'>
               <Text className='text-black font-bold' >Set your budget</Text>
