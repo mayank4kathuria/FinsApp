@@ -2,8 +2,8 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 App Screenshots
 
-1) home Page
-   - file:///home/mayank/Pictures/Screenshots/Screenshot%20from%202024-06-14%2017-28-18.png
+1) home Page 
+   ![Screenshot from 2024-06-14 17-28-18](https://github.com/mayank4kathuria/FinsApp/assets/16969558/651f6574-8389-4e67-989e-ed771e590ba6) 
 
 
 
