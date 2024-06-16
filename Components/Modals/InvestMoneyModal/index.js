@@ -8,7 +8,7 @@ import {
     View,
 } from 'react-native';
 
-import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils /numericUtils';
+import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils/numericUtils';
 import DropDown from '../../DropDown';
 
 const INVEST_TO_USERS_LIST = [
@@ -114,6 +114,7 @@ const InvestMoneyModal = ({ modalData }) => {
                     onChangeText={handleNameField}
                     value={amount}
                     placeholder='Enter Amount'
+                    placeholderTextColor={'#687076'}
                     keyboardType='numeric'
                     inputMode='numeric'
                     maxLength={10}

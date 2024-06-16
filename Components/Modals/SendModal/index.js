@@ -8,7 +8,7 @@ import {
     View,
 } from 'react-native';
 
-import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils /numericUtils';
+import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils/numericUtils';
 import DropDown from '../../DropDown';
 
 const SEND_TO_USERS_LIST = [
@@ -109,21 +109,21 @@ const SendMoneyModal = ({ modalData }) => {
     return (
         <KeyboardAvoidingView className='h-full relative'>
             <View className='mb-4'>
-                <Text className='font-bold mb-2' >Amount</Text>
+                <Text className='font-bold mb-2 text-black' >Amount</Text>
                 <TextInput
                     onChangeText={handleNameField}
                     value={amount}
                     placeholder='Enter Amount'
+                    placeholderTextColor={'#687076'}
                     keyboardType='numeric'
                     inputMode='numeric'
                     maxLength={10}
-                    defaultValue={''}
-                    className={`rounded-md border ${amountHasError && amountErrorText ? 'border-red-500' : 'border-neutral-300'}`}
+                    className={`rounded-md border text-black ${amountHasError && amountErrorText ? 'border-red-500' : 'border-neutral-300'}`}
                 />
                 {amountHasError && <Text className='text-sm text-red-500' >{amountErrorText}</Text>}
             </View>
             <View className='mb-4'>
-                <Text className='font-bold mb-2' >Send To</Text>
+                <Text className='font-bold mb-2 text-black' >Send To</Text>
                 <DropDown
                     options={SEND_TO_USERS_LIST}
                     hasError={SendToHasError}

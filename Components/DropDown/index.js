@@ -8,6 +8,8 @@ import {
     TextInput
 } from 'react-native';
 
+import DownArrow from '../../Assets/svgs/arrowDown.svg';
+
 
 function DropDown({ disabled = false, options = [], hasError = false, errorText = null, value = null, onSelectOption = () => null }) {
 
@@ -15,7 +17,6 @@ function DropDown({ disabled = false, options = [], hasError = false, errorText 
 
     function handleInputPress() {
         if (!disabled) setIsDrawerOpen(!isDrawerOpen);
-        onSelectOption(null)
     }
 
     function onSelectingOption(selected) {
@@ -30,12 +31,13 @@ function DropDown({ disabled = false, options = [], hasError = false, errorText 
             <TouchableOpacity onPress={handleInputPress} >
                 <View className='relative' >
                     <TextInput
-                        className={`p-2 w-full bg-white rounded-lg text-black border ${hasError ? 'border-red-400' : 'border-neutral-300'}`}
+                        className={`p-2 w-full ${disabled ? 'bg-neutral-200' : 'bg-white'} rounded-lg text-black border ${hasError ? 'border-red-400' : 'border-neutral-300'}`}
                         editable={false}
                         placeholder={value?.label ? value?.label : 'Select an option'}
+                        placeholderTextColor={!disabled ? '#687076' : '#000'}
                         value={value?.label}
                     />
-                    <Text className={`absolute right-0 text-neutral-500 top-4 mr-2 ${isDrawerOpen && 'rotate-180'}`} >V</Text>
+                    <View className={`absolute right-0 text-neutral-500 top-4 mr-2 ${isDrawerOpen && 'rotate-180'}`} ><DownArrow height={20} width={20} /></View>
                 </View>
             </TouchableOpacity>
             {hasError && <Text className='text-red-400' >{errorText}</Text>}
@@ -48,14 +50,14 @@ function DropDown({ disabled = false, options = [], hasError = false, errorText 
                             key={option.value + index}
                             onPress={() => onSelectingOption(option)}
                         >
-                            <View className='px-2 py-3 bg-white font-medium border-b-2 border-neutral-200' >
-                                <Text>{option.label}</Text>
+                            <View className='px-2 py-3 bg-white text-black font-medium border-b-2 border-neutral-200' >
+                                <Text className='text-black' >{option.label}</Text>
                             </View>
                         </TouchableOpacity>
                     )}
                     {options.length === 0 &&
                         <View className='p-2 bg-white font-medium' >
-                            <Text>No options to display</Text>
+                            <Text className='text-black' >No options to display</Text>
                         </View>}
                 </ScrollView>)
             }

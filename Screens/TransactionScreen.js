@@ -43,13 +43,10 @@ import {
 // type PropTypeStruc = { navigation: { navigate: Function } };
 
 function TransactionScreen() {
-  const isDarkMode = useColorScheme() === 'dark';
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const backgroundStyle = "bg-neutral-100 bg-blacky h-screen dark:bg-slate-900 p-4"
-
   return (
-    <SafeAreaView className={backgroundStyle}>
+    <SafeAreaView className={'bg-neutral-100 bg-blacky h-screen p-4'}>
       <Text>TransactionScreen coming soon</Text>
     </SafeAreaView>
   );

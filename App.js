@@ -31,9 +31,6 @@ import SettingsIcon from './Assets/svgs/SettingsIcon.svg';
 const BottomStack = createBottomTabNavigator();
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  // const backgroundStyle = "bg-neutral-100 bg-blacky h-screen dark:bg-slate-900 p-4"
 
   return (
     <Provider store={store} >

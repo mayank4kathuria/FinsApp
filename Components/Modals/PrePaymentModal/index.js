@@ -140,7 +140,6 @@ const PrePaymentModal = ({ modalData }) => {
             hasAnyError = true;
             handleAmountField('');
         }
-        // name = '', amount = '', categoryObj
         if (!hasAnyError) handleSubmitFn({ ...data, amount: amountField, categoryObj: categoryField, name: nameField });
     }
 
@@ -152,22 +151,23 @@ const PrePaymentModal = ({ modalData }) => {
     return (
         <KeyboardAvoidingView className='h-full relative'>
             <View className='mb-4'>
-                <Text className='font-bold mb-2' >Name</Text>
+                <Text className='font-bold mb-2 text-black' >Name</Text>
                 <TextInput
                     onChangeText={handlePrePaymentName}
                     value={nameField}
                     placeholder='Enter pre payment name'
+                    placeholderTextColor={isEditable && !nameField ? '#687076' : '#000'}
                     // keyboardType='numeric'
                     // inputMode='numeric'
                     disabled={!isEditable}
                     maxLength={20}
                     defaultValue={''}
-                    className={`rounded-md border ${nameFieldHasError && nameFieldErrorText ? 'border-red-500' : 'border-neutral-300'}`}
+                    className={`rounded-md border text-black ${!isEditable ? 'bg-neutral-200' : 'bg-white'} ${nameFieldHasError && nameFieldErrorText ? 'border-red-500' : 'border-neutral-300'}`}
                 />
                 {nameFieldHasError && <Text className='text-sm text-red-500' >{nameFieldHasError}</Text>}
             </View>
             <View className='mb-4'>
-                <Text className='font-bold mb-2' >Category</Text>
+                <Text className='font-bold mb-2 text-black' >Category</Text>
                 <DropDown
                     options={PRE_PAYMENT_CATEGORY_LIST}
                     hasError={categoryFieldHasError}
@@ -178,17 +178,18 @@ const PrePaymentModal = ({ modalData }) => {
                 />
             </View>
             <View className='mb-4'>
-                <Text className='font-bold mb-2' >Amount</Text>
+                <Text className='font-bold mb-2 text-black' >Amount</Text>
                 <TextInput
                     onChangeText={handleAmountField}
                     value={amountField}
-                    placeholder='Enter Amount'
+                    placeholder='Enter amount'
+                    placeholderTextColor={isEditable && !amountField ? '#687076' : '#000'}
                     keyboardType='numeric'
                     inputMode='numeric'
                     maxLength={10}
-                    // defaultValue={''}
-                    disabled={!isEditable}
-                    className={`rounded-md border ${amountFieldHasError && amountFieldErrorText ? 'border-red-500' : 'border-neutral-300'}`}
+                    defaultValue={amountField.toString() || '0'}
+                    editable={isEditable}
+                    className={`rounded-md border text-black ${!isEditable ? 'bg-neutral-200' : 'bg-white'} ${amountFieldHasError && amountFieldErrorText ? 'border-red-500' : 'border-neutral-300'}`}
                 />
                 {amountFieldHasError && <Text className='text-sm text-red-500' >{amountFieldErrorText}</Text>}
             </View>

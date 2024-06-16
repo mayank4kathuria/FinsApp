@@ -8,7 +8,7 @@ import {
     View,
 } from 'react-native';
 
-import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils /numericUtils';
+import { checkForNumberWithDecialAllowed, getNumberWithDecimal } from '../../../Utils/numericUtils';
 
 const AddMoneyModal = ({ modalData }) => {
 
@@ -63,16 +63,17 @@ const AddMoneyModal = ({ modalData }) => {
     return (
         <KeyboardAvoidingView className='h-full relative'>
             <View className=''>
-                <Text className='font-bold mb-2' >Amount</Text>
+                <Text className='font-bold mb-2 text-black' >Amount</Text>
                 <TextInput
                     onChangeText={handleNameField}
                     value={amount}
                     placeholder='Enter Amount'
+                    placeholderTextColor={'#687076'}
                     keyboardType='numeric'
                     inputMode='numeric'
                     maxLength={10}
                     defaultValue={''}
-                    className={`rounded-md border ${amountHasError && amountErrorText ? 'border-red-400' : 'border-neutral-300'}`}
+                    className={`rounded-md border text-black ${amountHasError && amountErrorText ? 'border-red-400' : 'border-neutral-300'}`}
                 />
                 {amountHasError && <Text className='text-sm text-red-400' >{amountErrorText}</Text>}
             </View>

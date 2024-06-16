@@ -46,7 +46,6 @@ function showModalContent({ modalType = null, modalData = null }) {
 }
 
 function HomeScreen() {
-  const isDarkMode = useColorScheme() === 'dark';
   const availableBalance = useSelector((state) => state.account.availableBalance);
   const currencySymbol = useSelector((state) => state.account.currencySymbol);
   const prePayments = useSelector(state => state.prePayment)
@@ -111,11 +110,8 @@ function HomeScreen() {
   }
 
 
-
-  const backgroundStyle = "bg-neutral-100 bg-blacky h-screen dark:bg-slate-900 p-4";
-
   return (
-    <SafeAreaView className={backgroundStyle}>
+    <SafeAreaView className={'bg-neutral-100 h-screen p-4'}>
       <StatusBar backgroundColor={'#f5f5f5'} barStyle={'light-content'} />
       <View className='bg-white p-4 rounded-2xl mb-8' >
         <View className='flex flex-row'>
@@ -140,7 +136,7 @@ function HomeScreen() {
               // dispatch(incrementMoney(1))
             }} >
             <AddMoney height={30} width={30} />
-            <Text className='mt-2 font-medium' >Add</Text>
+            <Text className='mt-2 font-medium text-black' >Add</Text>
           </TouchableOpacity>
           <TouchableOpacity className='p-2 flex-1 items-center mr-2 border border-neutral-200 rounded-xl'
             onPress={() => {
@@ -149,7 +145,7 @@ function HomeScreen() {
             }}
           >
             <SendMoney height={30} width={30} />
-            <Text className='mt-2 font-medium' >Send</Text>
+            <Text className='mt-2 font-medium text-black' >Send</Text>
           </TouchableOpacity>
           <TouchableOpacity className='p-2 flex-1 items-center border border-neutral-200 rounded-xl'
             onPress={() => {
@@ -158,7 +154,7 @@ function HomeScreen() {
             }}
           >
             <InvestMoney height={30} width={30} />
-            <Text className='mt-2 font-medium' >Invest</Text>
+            <Text className='mt-2 font-medium text-black' >Invest</Text>
           </TouchableOpacity>
         </View>
 

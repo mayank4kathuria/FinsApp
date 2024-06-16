@@ -43,7 +43,6 @@ import {
 // type PropTypeStruc = { navigation: { navigate: Function } };
 
 function AddNewModalScreen({ navigation }) {
-  const isDarkMode = useColorScheme() === 'dark';
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -51,8 +50,6 @@ function AddNewModalScreen({ navigation }) {
   }, []);
 
 
-
-  const backgroundStyle = "bg-neutral-100 bg-blacky h-screen dark:bg-slate-900 p-4"
 
   return (
     <View>
