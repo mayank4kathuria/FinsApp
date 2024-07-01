@@ -1,86 +1,24 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+Welcome!
 
-App Screenshots
+# About the App
 
-1) home Page 
-   ![Screenshot from 2024-06-14 17-28-18](https://github.com/mayank4kathuria/FinsApp/assets/16969558/651f6574-8389-4e67-989e-ed771e590ba6) 
+FinsApp is a demo app for showcasing the skills in Technologies like React Native. The app is an all in one finance application for tracking your spends, saving your Cards, analysing your transactions and scheduling recurring monthly payments among more such use cases. Based on intuitive User Interface, the app offers simple, functional UI that can work in absence of internet as well.
 
+## Demo
 
+<img src="https://github.com/mayank4kathuria/FinsApp/assets/16969558/ae269390-d728-481f-a4fa-cf92a599babb" width="250" height="300" alt="finsapp-gif" title='FinsApp - Track your spends' />
 
-# Getting Started
+## App Screenshots
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+1) ### Home Page
+   
+   <img src="https://github.com/mayank4kathuria/FinsApp/assets/16969558/651f6574-8389-4e67-989e-ed771e590ba6" width="250" height="500" alt="fhome-page" title='Home Page' />
 
-## Step 1: Start the Metro Server
+2) ### Send Money to anyone
+   
+   <img src="https://github.com/mayank4kathuria/FinsApp/assets/16969558/f9bda139-caf9-4005-ad04-16c2ddf6b73d" width="250" height="300" alt="send-money-page" title='send Money Page' />
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
-
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+   
+3) ### Scheduled your Monthly payments
+   
+   <img src="https://github.com/mayank4kathuria/FinsApp/assets/16969558/c203497c-5e4b-414e-a3ce-0a775bd6aada" width="250" height="300" alt="pre-payments-page" title='Pre Payments Page' />
