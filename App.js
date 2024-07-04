@@ -44,7 +44,7 @@ function App() {
             options={{ tabBarShowLabel: false, tabBarActiveBackgroundColor: '#818cf880', tabBarIcon: () => <HomeIcon height={30} width={30} /> }}
           />
           <BottomStack.Screen
-            name="Card"
+            name="My Cards"
             component={CardScreen}
             options={{ tabBarShowLabel: false, tabBarActiveBackgroundColor: '#818cf880', tabBarItemStyle: { marginRight: '10px' }, tabBarIcon: () => <CreditCard height={30} width={30} /> }}
           />

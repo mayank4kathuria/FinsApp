@@ -39,7 +39,6 @@ function showModalContent({ modalType = null, modalData = null }) {
     else if (modalType === 'VIEW_PRE_PAYMENT') return <ViewPrePaymentModal modalData={modalData} />
     else if (modalType === 'VIEW_ALL_PAYMENTS') return <ViewAllPaymentsModal modalData={modalData} />
     else if (modalType === 'ADD_NEW_CARD') return <AddNewCardModal modalData={modalData} />
-    // else if (modalType === 'VIEW_PRE_PAYMENT') return <ViewPrePayment modalData={modalData} />
     else if (modalType === 'PAY_TO_USER') return <PayToUserModal modalData={modalData} />
     else null;
   }
@@ -112,7 +111,7 @@ function HomeScreen() {
 
   return (
     <SafeAreaView className={'bg-neutral-100 h-screen p-4'}>
-      <StatusBar backgroundColor={'#f5f5f5'} barStyle={'light-content'} />
+      <StatusBar backgroundColor={'#f5f5f5'} barStyle={'default'} />
       <View className='bg-white p-4 rounded-2xl mb-8' >
         <View className='flex flex-row'>
           <View className='flex-1 border-r border-neutral-200' >
