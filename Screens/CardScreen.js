@@ -32,21 +32,19 @@ function CardScreen() {
 
       <View className="h-1/5 mb-4" >
         <ScrollView horizontal contentInsetAdjustmentBehavior="automatic" >
-          {cards.map((card, index) => {
-            return <Pressable key={`card-${index}`} className={`w-72 flex p-4 ml-8 rounded-2xl ${card.cardColor}`} onPress={() => setActiveCardIndex(index)} >
-              <View className="flex-1 flex flex-row justify-between" >
-                <Text className="font-extrabold" >{card.cardNoInText}</Text>
-                <Text className="font-black" >{card.cardNetwork}</Text>
+          {cards.map((card, index) => <Pressable key={`card-${index}`} className={`w-72 flex p-4 ml-8 rounded-2xl ${card.cardColor}`} onPress={() => setActiveCardIndex(index)} >
+            <View className="flex-1 flex flex-row justify-between" >
+              <Text className="font-extrabold" >{card.cardNoInText}</Text>
+              <Text className="font-black" >{card.cardNetwork}</Text>
+            </View>
+            <View className="flex-1" >
+              <Text className="font-semibold" >Available Balance</Text>
+              <View className="flex flex-row justify-between" >
+                <Text className="font-extrabold text-lg" >{`${allCards.currencySymbol} ${card.totalIncomeAmount}`}</Text>
+                <Text className="font-black text-lg" >{card.cardExpiryInText}</Text>
               </View>
-              <View className="flex-1" >
-                <Text className="font-semibold" >Available Balance</Text>
-                <View className="flex flex-row justify-between" >
-                  <Text className="font-extrabold text-lg" >{`${allCards.currencySymbol} ${card.totalIncomeAmount}`}</Text>
-                  <Text className="font-black text-lg" >{card.cardExpiryInText}</Text>
-                </View>
-              </View>
-            </Pressable>
-          })}
+            </View>
+          </Pressable>)}
 
 
         </ScrollView>
@@ -77,9 +75,29 @@ function CardScreen() {
 
       </View>
 
-      <View>
-        <Text className="text-black" >Transactions</Text>
-        <Text className="text-black" >{`${cards[activeCardIndex]?.transactions?.length}`}</Text>
+      <View className='h-3/5 bg-white p-2' >
+        <Text className='text-xl text-black font-bold' >Transactions</Text>
+        {/* <Text className="text-black" >{`${cards[activeCardIndex]?.transactions?.length}`}</Text> */}
+        <ScrollView className='py-2' >
+
+          {cards[activeCardIndex]?.transactions?.map((tran, index) => <View key={tran.id + '' +index} className='flex flex-row bg-white items-center px-2 py-4 mb-4 border border-neutral-300 rounded-lg' >
+            <View className='rounded-3xl mr-2'>
+              {/* <CategoryIcon height={30} width={30} /> */}
+              <Text>ICON</Text>
+            </View>
+            <View className='flex-1 flex flex-row justify-between items-center'>
+              <View>
+                <Text className='text-neutral-600 text-lg' >{tran.name}</Text>
+                <Text className='text-neutral-400 text-md' >{tran.category}</Text>
+              </View>
+              <View>
+                <Text className='text-neutral-600 text-right font-bold text-lg' >{`${allCards.currencySymbol}${tran.amount}`}</Text>
+                <Text className='text-neutral-400 text-sm' >{`${tran.dateString}`}</Text>
+              </View>
+            </View>
+          </View>)}
+
+        </ScrollView>
       </View>
 
     </SafeAreaView>
