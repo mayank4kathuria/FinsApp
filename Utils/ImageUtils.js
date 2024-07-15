@@ -5,6 +5,7 @@ import EntertainmentIcon from "../Assets/svgs/EntertainmentIcon.svg"
 import FoodIcon from "../Assets/svgs/FoodIcon.svg"
 import InvestmentIcon from "../Assets/svgs/InvestmentIcon.svg"
 import WifiIcon from "../Assets/svgs/WifiIcon.svg"
+import CarIcon from "../Assets/svgs/carIcon.svg"
 
 function chooseCategoryImage(categoryEnum){
 
@@ -29,5 +30,7 @@ export const ICONS_ENUM = {
     "INVESTMENT": InvestmentIcon,
     "UTILITIES": BuildingIcon,
     "ENTERTAINMENT": EntertainmentIcon,
-    "FOOD": FoodIcon,   
+    "FOOD": FoodIcon,
+    "HOUSING": BuildingIcon,
+    "TRANSPORTATION": CarIcon,
 }

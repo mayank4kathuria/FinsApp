@@ -16,8 +16,8 @@ import {
   View,
 } from 'react-native';
 
-
 import PointArrow from '../Assets/svgs/BackArrow.svg';
+import { ICONS_ENUM } from '../Utils/ImageUtils';
 
 
 function CardScreen() {
@@ -75,27 +75,30 @@ function CardScreen() {
 
       </View>
 
-      <View className='h-3/5 bg-white p-2' >
+      <View className='h-3/5 bg-white p-2 pb-20' >
         <Text className='text-xl text-black font-bold' >Transactions</Text>
-        {/* <Text className="text-black" >{`${cards[activeCardIndex]?.transactions?.length}`}</Text> */}
+
         <ScrollView className='py-2' >
 
-          {cards[activeCardIndex]?.transactions?.map((tran, index) => <View key={tran.id + '' +index} className='flex flex-row bg-white items-center px-2 py-4 mb-4 border border-neutral-300 rounded-lg' >
-            <View className='rounded-3xl mr-2'>
-              {/* <CategoryIcon height={30} width={30} /> */}
-              <Text>ICON</Text>
-            </View>
-            <View className='flex-1 flex flex-row justify-between items-center'>
-              <View>
-                <Text className='text-neutral-600 text-lg' >{tran.name}</Text>
-                <Text className='text-neutral-400 text-md' >{tran.category}</Text>
+          {cards[activeCardIndex]?.transactions?.map((tran, index) => {
+            const CategoryIcon = ICONS_ENUM[tran.categoryEnum];
+
+            return <View key={tran.id + '' + index} className={`flex flex-row bg-white items-center px-2 py-4 mb-4 border border-l-8 border-neutral-300 rounded-lg ${tran.typeEnum === "CREDIT" ? 'border-l-green-400' : 'border-l-red-400'}`} >
+              <View className='rounded-3xl mr-2 p-2'>
+                <CategoryIcon height={30} width={30} />
               </View>
-              <View>
-                <Text className='text-neutral-600 text-right font-bold text-lg' >{`${allCards.currencySymbol}${tran.amount}`}</Text>
-                <Text className='text-neutral-400 text-sm' >{`${tran.dateString}`}</Text>
+              <View className='flex-1 flex flex-row justify-between items-center'>
+                <View>
+                  <Text className='text-neutral-600 text-lg' >{tran.name}</Text>
+                  <Text className='text-neutral-400 text-md' >{tran.category}</Text>
+                </View>
+                <View>
+                  <Text className='text-neutral-600 text-right font-bold text-lg' >{`${allCards.currencySymbol}${tran.amount}`}</Text>
+                  <Text className='text-neutral-400 text-sm' >{`${tran.dateString}`}</Text>
+                </View>
               </View>
             </View>
-          </View>)}
+          })}
 
         </ScrollView>
       </View>
