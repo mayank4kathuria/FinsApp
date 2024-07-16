@@ -73,7 +73,7 @@ const AddMoneyModal = ({ modalData }) => {
                     inputMode='numeric'
                     maxLength={10}
                     defaultValue={''}
-                    className={`rounded-md border text-black ${amountHasError && amountErrorText ? 'border-red-400' : 'border-neutral-300'}`}
+                    className={`rounded-md pl-2 border text-black ${amountHasError && amountErrorText ? 'border-red-400' : 'border-neutral-300'}`}
                 />
                 {amountHasError && <Text className='text-sm text-red-400' >{amountErrorText}</Text>}
             </View>

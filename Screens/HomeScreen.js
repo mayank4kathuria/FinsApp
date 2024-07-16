@@ -104,7 +104,7 @@ function HomeScreen() {
   }
 
   function handlePaymentClick(prePaymentObj,) {
-    setModalObj({ modalType: 'VIEW_PRE_PAYMENT', modalData: { handleSubmitFn: (data) => handleViewPrePaymentSubmit(data, 'VIEW_ALL_PAYMENTS'), currencySymbol, data: prePaymentObj } });
+    setModalObj({ modalType: 'VIEW_PRE_PAYMENT', modalData: { handleSubmitFn: (data) => handleViewPrePaymentSubmit(data, 'VIEW_ALL_PAYMENTS'), currencySymbol, data: prePaymentObj }, handleBackBtn: () => setModalObj({ modalType: 'VIEW_ALL_PAYMENTS', modalData: { currencySymbol, handleSubmitFn: handleViewPrePaymentSubmit, handlePaymentClick } }) });
     setIsModalOpen(true);
   }
 
@@ -214,7 +214,8 @@ function HomeScreen() {
       <BottomModal
         visible={isModalOpen}
         onClose={handleCloseClick}
-        showBackBtn
+        showBackBtn={!!modalObj?.handleBackBtn}
+        handleBackBtn={modalObj?.handleBackBtn}
         containerStyle={EXTRA_HEIGHT_MODALS.indexOf(modalObj.modalType) > -1 ? 'h-2/3' : ''}
       >
         {isModalOpen && showModalContent(modalObj)()}

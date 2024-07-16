@@ -1,26 +1,16 @@
 import React, { useState } from 'react';
 import { useSelector, usedispatch } from 'react-redux';
 import {
-  ActivityIndicator,
-  Button,
   FlatList,
-  Modal,
-  Pressable,
   SafeAreaView,
-  ScrollView,
   StatusBar,
   Text,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  useColorScheme,
   View,
 } from 'react-native';
 
 import { ICONS_ENUM } from '../Utils/ImageUtils';
 
 function TransactionScreen() {
-  const [activeCardIndex, setActiveCardIndex] = useState(0);
   const allCards = useSelector(state => state.allCards);
   const cards = allCards?.cards || [];
   const allTransac = cards?.reduce((acc, card) => {

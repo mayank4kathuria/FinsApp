@@ -119,7 +119,7 @@ const InvestMoneyModal = ({ modalData }) => {
                     inputMode='numeric'
                     maxLength={10}
                     defaultValue={''}
-                    className={`rounded-md border ${amountHasError && amountErrorText ? 'border-red-500' : 'border-neutral-300'}`}
+                    className={`rounded-md pl-2 text-black border ${amountHasError && amountErrorText ? 'border-red-500' : 'border-neutral-300'}`}
                 />
                 {amountHasError && <Text className='text-sm text-red-500' >{amountErrorText}</Text>}
             </View>

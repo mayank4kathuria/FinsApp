@@ -160,9 +160,10 @@ const PrePaymentModal = ({ modalData }) => {
                     // keyboardType='numeric'
                     // inputMode='numeric'
                     disabled={!isEditable}
+                    editable={isEditable}
                     maxLength={20}
                     defaultValue={''}
-                    className={`rounded-md border text-black ${!isEditable ? 'bg-neutral-200' : 'bg-white'} ${nameFieldHasError && nameFieldErrorText ? 'border-red-500' : 'border-neutral-300'}`}
+                    className={`rounded-md pl-2 border text-black ${!isEditable ? 'bg-neutral-200' : 'bg-white'} ${nameFieldHasError && nameFieldErrorText ? 'border-red-500' : 'border-neutral-300'}`}
                 />
                 {nameFieldHasError && <Text className='text-sm text-red-500' >{nameFieldHasError}</Text>}
             </View>
@@ -189,7 +190,7 @@ const PrePaymentModal = ({ modalData }) => {
                     maxLength={10}
                     defaultValue={amountField.toString() || '0'}
                     editable={isEditable}
-                    className={`rounded-md border text-black ${!isEditable ? 'bg-neutral-200' : 'bg-white'} ${amountFieldHasError && amountFieldErrorText ? 'border-red-500' : 'border-neutral-300'}`}
+                    className={`rounded-md pl-2 border text-black ${!isEditable ? 'bg-neutral-200' : 'bg-white'} ${amountFieldHasError && amountFieldErrorText ? 'border-red-500' : 'border-neutral-300'}`}
                 />
                 {amountFieldHasError && <Text className='text-sm text-red-500' >{amountFieldErrorText}</Text>}
             </View>

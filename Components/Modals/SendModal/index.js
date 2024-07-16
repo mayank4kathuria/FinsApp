@@ -118,7 +118,7 @@ const SendMoneyModal = ({ modalData }) => {
                     keyboardType='numeric'
                     inputMode='numeric'
                     maxLength={10}
-                    className={`rounded-md border text-black ${amountHasError && amountErrorText ? 'border-red-500' : 'border-neutral-300'}`}
+                    className={`rounded-md pl-2 border text-black ${amountHasError && amountErrorText ? 'border-red-500' : 'border-neutral-300'}`}
                 />
                 {amountHasError && <Text className='text-sm text-red-500' >{amountErrorText}</Text>}
             </View>

@@ -27,12 +27,12 @@ function CardScreen() {
 
 
   return (
-    <SafeAreaView className={'bg-neutral-100 h-screen p-4'}>
+    <ScrollView className={'bg-neutral-100 min-h-screen p-4'}>
       <StatusBar backgroundColor={'#f5f5f5'} barStyle={'default'} />
 
-      <View className="h-1/5 mb-4" >
+      <View className="h-40 mb-4" >
         <ScrollView horizontal contentInsetAdjustmentBehavior="automatic" >
-          {cards.map((card, index) => <Pressable key={`card-${index}`} className={`w-72 flex p-4 ml-8 rounded-2xl ${card.cardColor}`} onPress={() => setActiveCardIndex(index)} >
+          {cards.map((card, index) => <Pressable key={`card-${index}`} className={`w-72 flex p-4 ml-8 rounded-2xl ${!!card.cardColor ? card.cardColor : 'bg-indigo-500'}`} onPress={() => setActiveCardIndex(index)} >
             <View className="flex-1 flex flex-row justify-between" >
               <Text className="font-extrabold" >{card.cardNoInText}</Text>
               <Text className="font-black" >{card.cardNetwork}</Text>
@@ -75,15 +75,15 @@ function CardScreen() {
 
       </View>
 
-      <View className='h-3/5 bg-white p-2 pb-20' >
+      <View className='bg-white p-2 pb-40' >
         <Text className='text-xl text-black font-bold' >Transactions</Text>
 
-        <ScrollView className='py-2' >
+        <View className='py-2' >
 
           {cards[activeCardIndex]?.transactions?.map((tran, index) => {
             const CategoryIcon = ICONS_ENUM[tran.categoryEnum];
 
-            return <View key={tran.id + '' + index} className={`flex flex-row bg-white items-center px-2 py-4 mb-4 border border-l-8 border-neutral-300 rounded-lg ${tran.typeEnum === "CREDIT" ? 'border-l-green-400' : 'border-l-red-400'}`} >
+            return <View key={`${tran.id}-${index}`} className={`flex flex-row bg-white items-center px-2 py-4 mb-4 border border-l-8 border-neutral-300 rounded-lg ${tran.typeEnum === "CREDIT" ? 'border-l-green-400' : 'border-l-red-400'}`} >
               <View className='rounded-3xl mr-2 p-2'>
                 <CategoryIcon height={30} width={30} />
               </View>
@@ -100,10 +100,10 @@ function CardScreen() {
             </View>
           })}
 
-        </ScrollView>
+        </View>
       </View>
 
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 

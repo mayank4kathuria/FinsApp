@@ -16,7 +16,7 @@ const cardsSlice = createSlice({
                 nameOnCard: 'Test 12',
                 cardExpiry: 1720872264, // epooch value
                 cardExpiryInText: '09/2024',
-                cardColor: 'bg-teal-500',
+                cardColor: 'bg-indigo-500',
                 totalIncomeAmount: 10000,
                 totalOutgoneAmount: 7000,
                 transactions: [

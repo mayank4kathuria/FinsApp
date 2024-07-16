@@ -20,7 +20,17 @@ function SettingScreen() {
 
   return (
     <SafeAreaView className={'bg-neutral-100 bg-blacky h-screen p-4'}>
-      <Text className='text-black text-lg py-2' >We are working on bringing Setting section soon on this app</Text>
+      <Text className='text-black text-lg py-2' >We are working on bringing setting section soon on this app</Text>
+
+      <View className='' >
+        <View className='flex flex-row bg-white items-center p-4 border border-neutral-100 rounded-xl' >
+          <View className='px-2'>
+            <Text className='text-black font-bold' >App Developer</Text>
+            <Text className='text-neutral-500 font-large' >MAYANK KATHURIA</Text>
+          </View>
+        </View>
+      </View>
+
     </SafeAreaView>
   );
 }
