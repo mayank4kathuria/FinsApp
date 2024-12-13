@@ -3,7 +3,7 @@
 FinsApp is a demo app for showcasing the skills in Technologies like React Native. The app is an all in one finance application for tracking your spends, saving your Cards, analysing your transactions and scheduling recurring monthly payments among more such use cases. Based on intuitive User Interface, the app offers simple, functional UI that can work in absence of internet as well.
 
 
-<img width="1526" alt="finsapp-hero-img" src="https://github.com/user-attachments/assets/5693acc0-f44b-4312-a29e-e3aec9921b93" width="600" height="800" title='FinsApp - Track your spends' />
+<img width="1526" alt="finsapp-hero-img" src="https://github.com/user-attachments/assets/5693acc0-f44b-4312-a29e-e3aec9921b93" title='FinsApp - Track your spends' />
 
 
 ## App Screenshots
