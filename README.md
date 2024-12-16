@@ -1,7 +1,11 @@
 # FinsApp - Track your Spends
 
+## Description
 FinsApp is a demo app for showcasing the skills in Technologies like React Native. The app is an all in one finance application for tracking your spends, saving your Cards, analysing your transactions and scheduling recurring monthly payments among more such use cases. Based on intuitive User Interface, the app offers simple, functional UI that can work in absence of internet as well.
 
+## Download APK - https://github.com/mayank4kathuria/FinsApp/releases
+
+## FinsApp Banner
 
 <img width="1526" alt="finsapp-hero-img" src="https://github.com/user-attachments/assets/5693acc0-f44b-4312-a29e-e3aec9921b93" title='FinsApp - Track your spends' />
 
@@ -10,13 +14,21 @@ FinsApp is a demo app for showcasing the skills in Technologies like React Nativ
 
 1) ### Home Page
    
-   <img src="https://github.com/mayank4kathuria/FinsApp/assets/16969558/651f6574-8389-4e67-989e-ed771e590ba6" width="250" height="500" alt="fhome-page" title='Home Page' />
+   ![iphone-hand-psd-mockup](https://github.com/user-attachments/assets/0076a7be-72eb-4af7-84de-adece668576b)
 
-2) ### Send Money to anyone
-   
-   <img src="https://github.com/mayank4kathuria/FinsApp/assets/16969558/f9bda139-caf9-4005-ad04-16c2ddf6b73d" width="250" height="300" alt="send-money-page" title='send Money Page' />
+
+2) ### Multi Screens
+
+   ![iphone-multiple-screens-mockup](https://github.com/user-attachments/assets/127b7d4b-65f5-4814-ba55-397b5c3884d1)
 
    
-3) ### Scheduled your Monthly payments
+4) ### Scheduled your Monthly payments
    
-   <img src="https://github.com/mayank4kathuria/FinsApp/assets/16969558/c203497c-5e4b-414e-a3ce-0a775bd6aada" width="250" height="300" alt="pre-payments-page" title='Pre Payments Page' />
+   ![hand-holding-phone-mockup](https://github.com/user-attachments/assets/5c13d678-bbaf-4cf3-8b3d-420f9e16c016)
+
+5) ### All App Screens
+
+   ![app-screen-showcase-mockup](https://github.com/user-attachments/assets/6f8c1008-a4d9-490f-b972-e0ed6833533f)
+
+
+Thank you :)
